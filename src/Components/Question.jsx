@@ -68,7 +68,7 @@ function Question() {
     const [scoreJudge, setScoreJudge] = useState("");
 
     const perSelected = ()=>{
-        const selectSound = new Audio("../../Images/beep.mp3")
+        const selectSound = new Audio("https://github.com/Nikhil-Jalandhra/Quiz-App-My-First-Project-/raw/master/Images/beep.mp3")
         selectSound.play()
     const answered = document.querySelectorAll('input[type="radio"]:checked').length;
         if (answered == Questions.length) {
@@ -78,7 +78,7 @@ function Question() {
     
     const handleFormSubmit =(e)=>{
 
-        const submitSound = new Audio("../../Images/click.mp3")
+        const submitSound = new Audio("https://github.com/Nikhil-Jalandhra/Quiz-App-My-First-Project-/raw/master/Images/click.mp3")
         submitSound.play()
 
         e.preventDefault()
@@ -99,7 +99,7 @@ function Question() {
 
         if(totalAnswer == Questions.length){
             setScoreJudge("Wonderfull👌🥳")
-            const winningSound = new Audio("../../Images/seven.mp3")
+            const winningSound = new Audio("https://github.com/Nikhil-Jalandhra/Quiz-App-My-First-Project-/raw/master/Images/seven.mp3")
             winningSound.play()
         }
         else if(totalAnswer == 0){
