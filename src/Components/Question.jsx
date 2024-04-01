@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import logo from "../../Images/logo.png"
+import logo from "../Images/logo.png"
+import beepSound from "../Images/beep.mp3"
+import clickSound from "../Images/click.mp3"
+import sevenSound from "../Images/seven.mp3"
 
 const Questions = [
     {
@@ -68,7 +71,7 @@ function Question() {
     const [scoreJudge, setScoreJudge] = useState("");
 
     const perSelected = ()=>{
-        const selectSound = new Audio("../../Images/beep.mp3")
+        const selectSound = new Audio(beepSound)
         selectSound.play()
     const answered = document.querySelectorAll('input[type="radio"]:checked').length;
         if (answered == Questions.length) {
@@ -78,7 +81,7 @@ function Question() {
     
     const handleFormSubmit =(e)=>{
 
-        const submitSound = new Audio("../../Images/click.mp3")
+        const submitSound = new Audio(clickSound)
         submitSound.play()
 
         e.preventDefault()
@@ -99,7 +102,7 @@ function Question() {
 
         if(totalAnswer == Questions.length){
             setScoreJudge("Wonderfull👌🥳")
-            const winningSound = new Audio("../../Images/seven.mp3")
+            const winningSound = new Audio(sevenSound)
             winningSound.play()
         }
         else if(totalAnswer == 0){
