@@ -1,9 +1,8 @@
-import React from 'react';
 import { useState } from 'react';
-import logo from "../Images/logo.png"
-import beepSound from "../Images/beep.mp3"
-import clickSound from "../Images/click.mp3"
-import sevenSound from "../Images/seven.mp3"
+import logo from "../Images/logo.png";
+import beepSound from "../Images/beep.mp3";
+import clickSound from "../Images/click.mp3";
+import sevenSound from "../Images/seven.mp3";
 
 const Questions = [
     {
@@ -65,83 +64,87 @@ const Questions = [
 
 function Question() {
     
+    // Declared all required constants here...
+    const selectSound = new Audio(beepSound);
+    const submitSound = new Audio(clickSound);
+    const winningSound = new Audio(sevenSound);
     const [totalScore, setTotalScore] = useState(0);
+    const [scoreJudge, setScoreJudge] = useState("");
     const [showResult, setShowResult] = useState("hidden");
     const [buttonFunction, setButtonFunction] = useState("hidden");
-    const [scoreJudge, setScoreJudge] = useState("");
 
+    // Method for everyClick or Show submit Button
     const perSelected = ()=>{
-        const selectSound = new Audio(beepSound)
-        selectSound.play()
-    const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+        selectSound.play();
+        const answered = document.querySelectorAll('input[type="radio"]:checked').length;
         if (answered == Questions.length) {
-            setButtonFunction("")
+            setButtonFunction("");
         }
-    }
+    };
     
+    // All after Submit
     const handleFormSubmit =(e)=>{
+        e.preventDefault();
+        submitSound.play();
+        const form = new FormData(e.target);
+        let totalAnswer = 0
 
-        const submitSound = new Audio(clickSound)
-        submitSound.play()
+        // Score tracker
+        Questions.forEach((ques)=>{
+            const selectedAnswer = form.get(ques.question);
+            if (selectedAnswer === "true") {
+                totalAnswer++;
+            }
+        });
 
-        e.preventDefault()
-        
-        const form = new FormData(e.target)
-            let totalAnswer = 0
+        // show score
+        setShowResult("");
+        setTotalScore(totalAnswer);
 
-                Questions.forEach((ques)=>{
-                const selectedAnswer = form.get(ques.question)
-                    if (selectedAnswer === "true") {
-                        totalAnswer++
-                            }
-                })
-
-    
-        setShowResult("")
-        setTotalScore(totalAnswer)
-
+        // score judge 🧪
         if(totalAnswer == Questions.length){
-            setScoreJudge("Wonderfull👌🥳")
-            const winningSound = new Audio(sevenSound)
-            winningSound.play()
+            setScoreJudge("Wonderfull👌🥳");
+            winningSound.play();
         }
         else if(totalAnswer == 0){
-            setScoreJudge("Not Possible😂🤣")
+            setScoreJudge("Not Possible 😂🤣");
         }
         else if (totalAnswer > Questions.length/2 && totalAnswer <= Questions.length/1.1) {
-            setScoreJudge("Nice😁🤗")
+            setScoreJudge("Nice 😁🤗");
         }
         else if(totalAnswer == Questions.length/2){
-            setScoreJudge("Not Bad😊👍")
+            setScoreJudge("Not Bad 😊👍");
         }
         else if (totalAnswer < Questions.length/2) {
-            setScoreJudge("Average 👍")
+            setScoreJudge("Average 👍");
         }
 
+        // after submit window scroll to top 🔝
         window.scrollTo({
             top: 0,
             behavior: "smooth"
-        })
+        });
 
-    const realAnswer = document.querySelectorAll('div[id=true]')
+        // Mark right answer 🟢
+        const realAnswer = document.querySelectorAll('div[id=true]');
         realAnswer.forEach((ans)=>{
-            ans.classList.add("bg-green-500")
-        })
+            ans.classList.add("bg-green-500");
+        });
 
-        const wrongChecked = document.querySelectorAll('input[type="radio"]:checked')
+        // Mark wrong answer 🔴
+        const wrongChecked = document.querySelectorAll('input[type="radio"]:checked');
         wrongChecked.forEach((wro)=>{
             if(wro.value == "false"){
-                wro.parentElement.classList.add("bg-red-500")
+                wro.parentElement.classList.add("bg-red-500");
             }
-        })
+        });
            
     }
 
   return (
     <div className='w-full pb-[100px] flex flex-col items-center bg-[#3d3b3c]'>
-
         <div className='w-[310px] lg:w-[700px] flex flex-col items-center mt-[30px] rounded-2xl bg-[#c1bdb3]'>
-            <img className='w-[200px] lg:w-[250px]' src={logo} alt="" />
+            <img className='w-[200px] lg:w-[250px]' src={logo} alt="Jneek" />
             <h1 className={`${showResult} text-[20px] lg:text-[30px]`}>{scoreJudge}</h1>
             <h1 id='score' className={`${showResult} text-[21px] lg:text-[31px] mb-4`}>Your Score is = <span className=' font-extrabold'>{totalScore}</span>/{Questions.length}</h1>
         </div>
@@ -162,16 +165,15 @@ function Question() {
                                     id={answer.text} />
                                     <h1>{answer.text}</h1>
                                  </div>
-                             </label>
+                            </label>
                         ))}
-            </div>
-            ))} 
+                </div>
+            ))};
 
             <div className={`w-[310px] lg:w-[700px] bg-[#c1bdb3] rounded-xl mt-2 flex ${buttonFunction}  p-5 lg:p-8 justify-center` }>
                 <button type='submit' className='bg-white px-3 lg:px-6 text-[20px] lg:text-[30px] font-bold rounded-xl'>Submit
                 </button>
             </div>
-
         </form>
 
     </div>
