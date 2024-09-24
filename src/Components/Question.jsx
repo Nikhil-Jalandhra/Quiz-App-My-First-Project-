@@ -89,13 +89,20 @@ function Question() {
         const form = new FormData(e.target);
         let totalAnswer = 0
 
-        // Score tracker
-        Questions.forEach((ques)=>{
-            const selectedAnswer = form.get(ques.question);
-            if (selectedAnswer === "true") {
+        // Initial Score tracker
+        // Questions.forEach((ques)=>{
+        //     const selectedAnswer = form.get(ques.question);
+        //     if (selectedAnswer === "true") {
+        //         totalAnswer++;
+        //     }
+        // });
+
+        // New Score tracker
+        form.forEach((value) => {
+            if (value === "true") {
                 totalAnswer++;
             }
-        });
+        })
 
         // show score
         setShowResult("");
