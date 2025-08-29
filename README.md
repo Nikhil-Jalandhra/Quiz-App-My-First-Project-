@@ -1,8 +1,16 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Quiz-App-My-First-Project
 
-Currently, two official plugins are available:
+This is my First Project with my own knowledge (#no Youtube tutorials)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Live Here
+
+
+
+https://quiz-app-my-first-project.vercel.app/
+## Screenshots
+
+![App Screenshot](https://www.jneek.com/projects-images/qz2.png)
+
+![App Screenshot](https://www.jneek.com/projects-images/qz3.png)
